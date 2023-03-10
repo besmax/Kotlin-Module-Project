@@ -16,6 +16,7 @@ class NoteDatabase {
     }
 
     fun addNote(note: Note, noteRepositoryTitle: String) {
-        noteRepositories[noteRepositoryTitle]?.notes?.add(note)
+        noteRepositories[noteRepositoryTitle]?.notes?.add(Note(NOTE_ID, note.title, note.text))
+        NOTE_ID+=1
     }
 }
