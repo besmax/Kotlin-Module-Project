@@ -10,7 +10,6 @@ fun main() {
     database.populateDatabase()
 
     var currentScreen: Screen = noteRepositoryListScreen
-    var previousScreen: Screen = noteRepositoryListScreen
 
     while (true) {
         console.print(currentScreen.showMenu())
@@ -18,7 +17,7 @@ fun main() {
         while (true) {
             console.print("Введите команду")
             command = console.read()
-            when  {
+            when {
                 command == null -> console.print("Команда не может быть null")
                 command == "" -> console.print("Команда не может быть пустой")
                 !command.all { it.isDigit() } -> console.print("Команда должна быть числом")
@@ -27,11 +26,6 @@ fun main() {
         }
 
         if (command.toInt() == 0 && currentScreen is NoteRepositoryListScreen) return
-        else {
-            previousScreen = currentScreen
-            currentScreen = currentScreen.handleAction(command.toInt())
-        }
-
+        else currentScreen = currentScreen.handleAction(command.toInt())
     }
-
 }

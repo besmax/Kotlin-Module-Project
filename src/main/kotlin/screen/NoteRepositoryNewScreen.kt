@@ -5,7 +5,8 @@ import console.DefaultConsole
 import model.Note
 import model.NoteRepository
 
-class NoteRepositoryNewScreen(val database: NoteDatabase, val console: DefaultConsole) : Screen(database) {
+class NoteRepositoryNewScreen(val database: NoteDatabase,
+                              val console: DefaultConsole) : Screen(database) {
     override fun showMenu(): String {
         var menu = StringBuilder()
         menu.append("============================================")

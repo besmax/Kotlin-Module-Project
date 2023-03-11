@@ -3,7 +3,6 @@ package screen
 import NoteDatabase
 import console.DefaultConsole
 import model.Note
-import model.NoteRepository
 
 class NoteNewScreen(val database: NoteDatabase,
                     val console: DefaultConsole,

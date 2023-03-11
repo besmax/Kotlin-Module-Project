@@ -22,7 +22,6 @@ class NoteRepositoryListScreen(val database: NoteDatabase) : Screen(database) {
             menu.append(System.lineSeparator())
             counter+=1
         }
-
         return menu.toString().trim()
     }
 

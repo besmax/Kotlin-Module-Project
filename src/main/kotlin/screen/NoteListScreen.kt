@@ -1,10 +1,10 @@
 package screen
 
 import NoteDatabase
-import NoteDatabase.Companion.noteRepositories
 import console.DefaultConsole
 
-class NoteListScreen (val noteRepositoryName: String, val database: NoteDatabase) : Screen(database) {
+class NoteListScreen (val noteRepositoryName: String,
+                      val database: NoteDatabase) : Screen(database) {
 
     val listOfItems =   database.getListOfNotesFromRepository(noteRepositoryName)
     override fun showMenu(): String {

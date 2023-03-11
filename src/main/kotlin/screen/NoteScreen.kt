@@ -1,7 +1,6 @@
 package screen
 
 import NoteDatabase
-import console.DefaultConsole
 import model.Note
 
 class NoteScreen(val database: NoteDatabase, val note: Note, val noteRepositoryName: String) : Screen(database) {
