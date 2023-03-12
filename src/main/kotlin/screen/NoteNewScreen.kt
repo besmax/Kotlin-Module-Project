@@ -1,12 +1,10 @@
 package screen
 
 import NoteDatabase
-import console.DefaultConsole
 import console.InputChecker
 import model.Note
 
 class NoteNewScreen(val database: NoteDatabase,
-                    val console: DefaultConsole,
                     val noteRepositoryName: String,
                     val inputChecker: InputChecker) : Screen(database) {
     override fun showMenu(): String {

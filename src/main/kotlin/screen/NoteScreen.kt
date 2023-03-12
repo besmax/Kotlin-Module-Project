@@ -3,7 +3,9 @@ package screen
 import NoteDatabase
 import model.Note
 
-class NoteScreen(val database: NoteDatabase, val note: Note, val noteRepositoryName: String) : Screen(database) {
+class NoteScreen(val database: NoteDatabase,
+                 val note: Note,
+                 val noteRepositoryName: String) : Screen(database) {
     override fun showMenu(): String {
         val menu = StringBuilder()
         menu.append("============================================")

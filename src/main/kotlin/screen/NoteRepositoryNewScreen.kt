@@ -7,7 +7,6 @@ import model.Note
 import model.NoteRepository
 
 class NoteRepositoryNewScreen(val database: NoteDatabase,
-                              val console: DefaultConsole,
                               val inputChecker: InputChecker) : Screen(database) {
     override fun showMenu(): String {
         var menu = StringBuilder()

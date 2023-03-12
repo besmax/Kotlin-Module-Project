@@ -28,7 +28,7 @@ class NoteRepositoryListScreen(val database: NoteDatabase) : Screen(database) {
 
     override fun handleAction(numberOfAction: Int) : Screen {
         when (numberOfAction) {
-            1 -> return NoteRepositoryNewScreen(database, DefaultConsole(), InputChecker(DefaultConsole()))
+            1 -> return NoteRepositoryNewScreen(database, InputChecker(DefaultConsole()))
             else -> return NoteListScreen(NoteDatabase.noteRepositories.values.toMutableList()[numberOfAction - 2].title, database)
         }
     }
