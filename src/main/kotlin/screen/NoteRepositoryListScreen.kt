@@ -27,8 +27,12 @@ class NoteRepositoryListScreen(val database: NoteDatabase) : Screen(database) {
     }
 
     override fun handleAction(numberOfAction: Int) : Screen {
-        when (numberOfAction) {
-            1 -> return NoteRepositoryNewScreen(database, InputChecker(DefaultConsole()))
+        when {
+            numberOfAction == 1 -> return NoteRepositoryNewScreen(database, InputChecker(DefaultConsole()))
+            numberOfAction > (database.getListOfRepositories().size + 1) -> {
+                DefaultConsole().print("Архива с таким номером нет, попробуйте ещё раз")
+                return NoteRepositoryListScreen(database)
+            }
             else -> return NoteListScreen(NoteDatabase.noteRepositories.values.toMutableList()[numberOfAction - 2].title, database)
         }
     }

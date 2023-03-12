@@ -7,8 +7,9 @@ import console.InputChecker
 class NoteListScreen (val noteRepositoryName: String,
                       val database: NoteDatabase) : Screen(database) {
 
-    val listOfItems =   database.getListOfNotesFromRepository(noteRepositoryName)
+    var listOfItems =   database.getListOfNotesFromRepository(noteRepositoryName)
     override fun showMenu(): String {
+        listOfItems =   database.getListOfNotesFromRepository(noteRepositoryName)
         val menu = StringBuilder()
         menu.append("============================================")
         menu.append(System.lineSeparator())
@@ -36,10 +37,15 @@ class NoteListScreen (val noteRepositoryName: String,
     }
 
     override fun handleAction(numberOfAction: Int): Screen {
-        when (numberOfAction) {
-            0 -> return NoteRepositoryListScreen(database)
-            1 -> return NoteNewScreen(database, noteRepositoryName, InputChecker(DefaultConsole()))
-            else -> return NoteScreen(database, listOfItems.get(numberOfAction - 2), noteRepositoryName)
+        listOfItems =   database.getListOfNotesFromRepository(noteRepositoryName)
+        when {
+            numberOfAction == 0 -> return NoteRepositoryListScreen(database)
+            numberOfAction == 1 -> return NoteNewScreen(database, noteRepositoryName, InputChecker(DefaultConsole()))
+            numberOfAction > (listOfItems.size + 1) -> {
+                DefaultConsole().print("Заметки с таким номером нет, попробуйте ещё раз")
+                return NoteListScreen(noteRepositoryName, database)
+            }
+                    else -> return NoteScreen(database, listOfItems.get(numberOfAction - 2), noteRepositoryName)
         }
     }
 }
