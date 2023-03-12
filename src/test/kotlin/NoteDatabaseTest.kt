@@ -21,6 +21,7 @@ class NoteDatabaseTest {
         databaseTest.addNoteRepository(noteRepo)
         val note = Note(0, "Vengeance", "Kick boss's ass")
         databaseTest.addNote(note, "Right after fired")
+
         assertEquals("Kick boss's ass",
             NoteDatabase.noteRepositories["Right after fired"]?.notes?.get(0)?.text ?: "no")
     }

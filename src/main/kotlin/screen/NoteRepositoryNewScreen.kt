@@ -1,7 +1,6 @@
 package screen
 
 import NoteDatabase
-import console.DefaultConsole
 import console.InputChecker
 import model.Note
 import model.NoteRepository

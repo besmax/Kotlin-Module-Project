@@ -4,7 +4,6 @@ import NoteDatabase
 import console.DefaultConsole
 import console.InputChecker
 
-
 class NoteRepositoryListScreen(val database: NoteDatabase) : Screen(database) {
 
     override fun showMenu(): String {
