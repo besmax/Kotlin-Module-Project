@@ -2,6 +2,7 @@ package screen
 
 import NoteDatabase
 import console.DefaultConsole
+import console.InputChecker
 
 
 class NoteRepositoryListScreen(val database: NoteDatabase) : Screen(database) {
@@ -27,8 +28,9 @@ class NoteRepositoryListScreen(val database: NoteDatabase) : Screen(database) {
 
     override fun handleAction(numberOfAction: Int) : Screen {
         when (numberOfAction) {
-            1 -> return NoteRepositoryNewScreen(database, DefaultConsole())
+            1 -> return NoteRepositoryNewScreen(database, DefaultConsole(), InputChecker(DefaultConsole()))
             else -> return NoteListScreen(NoteDatabase.noteRepositories.values.toMutableList()[numberOfAction - 2].title, database)
         }
     }
+
 }

@@ -6,6 +6,8 @@ import model.Note
 class NoteScreen(val database: NoteDatabase, val note: Note, val noteRepositoryName: String) : Screen(database) {
     override fun showMenu(): String {
         val menu = StringBuilder()
+        menu.append("============================================")
+        menu.append(System.lineSeparator())
         menu.append("0. Выход")
         menu.append(System.lineSeparator())
         menu.append("Название архива заметки: $noteRepositoryName")

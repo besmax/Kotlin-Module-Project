@@ -2,11 +2,13 @@ package screen
 
 import NoteDatabase
 import console.DefaultConsole
+import console.InputChecker
 import model.Note
 
 class NoteNewScreen(val database: NoteDatabase,
                     val console: DefaultConsole,
-                    val noteRepositoryName: String) : Screen(database) {
+                    val noteRepositoryName: String,
+                    val inputChecker: InputChecker) : Screen(database) {
     override fun showMenu(): String {
         var menu = StringBuilder()
         menu.append("============================================")
@@ -21,24 +23,8 @@ class NoteNewScreen(val database: NoteDatabase,
 
     override fun handleAction(numberOfAction: Int): Screen {
         if (numberOfAction != 0) {
-            var newNoteName: String
-            while (true) {
-                console.print("Введите имя новой заметки")
-                newNoteName = console.read()
-                when  {
-                    newNoteName == null || newNoteName == "" -> console.print("Имя не может быть пустым")
-                    else -> break
-                }
-            }
-            var newNoteText: String
-            while (true) {
-                console.print("Введите текст новой заметки")
-                newNoteText = console.read()
-                when  {
-                    newNoteText == null || newNoteText == "" -> console.print("Текст не может быть пустым")
-                    else -> break
-                }
-            }
+            var newNoteName = inputChecker.getNameFromUser("заметка")
+            var newNoteText = inputChecker.getNameOfFieldFromUser("текст")
             database.addNote(Note(0, newNoteName, newNoteText), noteRepositoryName)
         }
         return NoteListScreen(noteRepositoryName, database)

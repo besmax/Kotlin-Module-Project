@@ -2,6 +2,7 @@ package screen
 
 import NoteDatabase
 import console.DefaultConsole
+import console.InputChecker
 
 class NoteListScreen (val noteRepositoryName: String,
                       val database: NoteDatabase) : Screen(database) {
@@ -9,6 +10,8 @@ class NoteListScreen (val noteRepositoryName: String,
     val listOfItems =   database.getListOfNotesFromRepository(noteRepositoryName)
     override fun showMenu(): String {
         val menu = StringBuilder()
+        menu.append("============================================")
+        menu.append(System.lineSeparator())
         menu.append("0. Выход")
         menu.append(System.lineSeparator())
         menu.append("1. Создать новую заметку")
@@ -35,7 +38,7 @@ class NoteListScreen (val noteRepositoryName: String,
     override fun handleAction(numberOfAction: Int): Screen {
         when (numberOfAction) {
             0 -> return NoteRepositoryListScreen(database)
-            1 -> return NoteNewScreen(database, DefaultConsole(), noteRepositoryName)
+            1 -> return NoteNewScreen(database, DefaultConsole(), noteRepositoryName, InputChecker(DefaultConsole()))
             else -> return NoteScreen(database, listOfItems.get(numberOfAction - 2), noteRepositoryName)
         }
     }
