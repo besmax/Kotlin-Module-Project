@@ -77,4 +77,26 @@ class NoteListScreenTest {
 
         assertEquals(actual.javaClass, expected.javaClass)
     }
+
+    @Test
+    fun handleActionOnNumberOfExistingNote() {
+        Mockito.`when`(databaseTest.getListOfNotesFromRepository("titleRepository")).thenReturn(
+            mutableListOf<Note>(Note(0, "title", "description")))
+        val actual = noteListScreenTest.handleAction(2)
+        val expected = NoteScreen(databaseTest, Note(0, "title", "description"), "titleRepository")
+
+        assertEquals(actual.javaClass, expected.javaClass)
+        assertEquals(actual.showMenu(), expected.showMenu())
+    }
+
+    @Test
+    fun handleActionOnNumberOfNonExistingNote() {
+        Mockito.`when`(databaseTest.getListOfNotesFromRepository("titleRepository")).thenReturn(
+            mutableListOf<Note>(Note(0, "title", "description")))
+        val actual = noteListScreenTest.handleAction(3)
+        val expected = NoteListScreen("titleRepository", databaseTest)
+
+        assertEquals(actual.javaClass, expected.javaClass)
+        assertEquals(actual.showMenu(), expected.showMenu())
+    }
 }
