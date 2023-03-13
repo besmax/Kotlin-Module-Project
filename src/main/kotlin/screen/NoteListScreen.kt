@@ -4,48 +4,40 @@ import NoteDatabase
 import console.DefaultConsole
 import console.InputChecker
 
-class NoteListScreen (val noteRepositoryName: String,
-                      val database: NoteDatabase) : Screen(database) {
+class NoteListScreen (
+    private val noteRepositoryName: String,
+    private val database: NoteDatabase) : Screen(database) {
 
-    var listOfItems =   database.getListOfNotesFromRepository(noteRepositoryName)
     override fun showMenu(): String {
-        listOfItems =   database.getListOfNotesFromRepository(noteRepositoryName)
+        val listOfItems =   database.getListOfNotesFromRepository(noteRepositoryName)
         val menu = StringBuilder()
-        menu.append("============================================")
-        menu.append(System.lineSeparator())
-        menu.append("0. Выход")
-        menu.append(System.lineSeparator())
-        menu.append("1. Создать новую заметку")
-        menu.append(System.lineSeparator())
-        menu.append("Заметки в архиве $noteRepositoryName:")
-        menu.append(System.lineSeparator())
+        menu.appendLine("============================================")
+        menu.appendLine("0. Выход")
+        menu.appendLine("1. Создать новую заметку")
+        menu.appendLine("Заметки в архиве $noteRepositoryName:")
 
         if  (listOfItems.isEmpty()) {
-            menu.append("В этом архиве пока нет заметок")
-            menu.append(System.lineSeparator())
+            menu.appendLine("В этом архиве пока нет заметок")
         }
-
-        if (listOfItems != null) {
-            var counter = 2
-            for (item in listOfItems) {
-                menu.append("$counter. ${item.title}")
-                menu.append(System.lineSeparator())
-                counter+=1
-            }
+        var counter = 2
+        for (item in listOfItems) {
+            menu.appendLine("$counter. ${item.title}")
+            counter+=1
         }
         return menu.toString().trim()
     }
 
     override fun handleAction(numberOfAction: Int): Screen {
-        listOfItems =   database.getListOfNotesFromRepository(noteRepositoryName)
-        when {
-            numberOfAction == 0 -> return NoteRepositoryListScreen(database)
-            numberOfAction == 1 -> return NoteNewScreen(database, noteRepositoryName, InputChecker(DefaultConsole()))
+        val listOfItems =   database.getListOfNotesFromRepository(noteRepositoryName)
+        return when {
+            numberOfAction == 0 -> NoteRepositoryListScreen(database)
+            numberOfAction == 1 -> NoteNewScreen(database, noteRepositoryName, InputChecker(DefaultConsole()))
             numberOfAction > (listOfItems.size + 1) -> {
                 DefaultConsole().print("Заметки с таким номером нет, попробуйте ещё раз")
-                return NoteListScreen(noteRepositoryName, database)
+                NoteListScreen(noteRepositoryName, database)
             }
-                    else -> return NoteScreen(database, listOfItems.get(numberOfAction - 2), noteRepositoryName)
+
+            else -> NoteScreen(database, listOfItems.get(numberOfAction - 2), noteRepositoryName)
         }
     }
 }

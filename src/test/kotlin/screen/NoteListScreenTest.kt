@@ -18,7 +18,7 @@ class NoteListScreenTest {
         "архивЪ",
         mutableListOf(Note(0, "title", "description"))
     )
-    val noteListScreenTest = NoteListScreen("titleRepository", databaseTest)
+    private val noteListScreenTest = NoteListScreen("titleRepository", databaseTest)
 
     @Test
     fun showMenuReturnsCorrectStringWhenNoNotes() {
@@ -27,16 +27,11 @@ class NoteListScreenTest {
         val actual = noteListScreenTest.showMenu()
 
         val expected = StringBuilder()
-        expected.append("============================================")
-        expected.append(System.lineSeparator())
-        expected.append("0. Выход")
-        expected.append(System.lineSeparator())
-        expected.append("1. Создать новую заметку")
-        expected.append(System.lineSeparator())
-        expected.append("Заметки в архиве titleRepository:")
-        expected.append(System.lineSeparator())
-        expected.append("В этом архиве пока нет заметок")
-        expected.append(System.lineSeparator())
+        expected.appendLine("============================================")
+        expected.appendLine("0. Выход")
+        expected.appendLine("1. Создать новую заметку")
+        expected.appendLine("Заметки в архиве titleRepository:")
+        expected.appendLine("В этом архиве пока нет заметок")
 
         assertEquals(expected.toString().trim(), actual)
     }
@@ -48,16 +43,11 @@ class NoteListScreenTest {
         val actual = noteListScreenTest.showMenu()
 
         val expected = StringBuilder()
-        expected.append("============================================")
-        expected.append(System.lineSeparator())
-        expected.append("0. Выход")
-        expected.append(System.lineSeparator())
-        expected.append("1. Создать новую заметку")
-        expected.append(System.lineSeparator())
-        expected.append("Заметки в архиве titleRepository:")
-        expected.append(System.lineSeparator())
-        expected.append("2. title")
-        expected.append(System.lineSeparator())
+        expected.appendLine("============================================")
+        expected.appendLine("0. Выход")
+        expected.appendLine("1. Создать новую заметку")
+        expected.appendLine("Заметки в архиве titleRepository:")
+        expected.appendLine("2. title")
 
         assertEquals(expected.toString().trim(), actual)
     }

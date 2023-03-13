@@ -3,21 +3,17 @@ package screen
 import NoteDatabase
 import model.Note
 
-class NoteScreen(val database: NoteDatabase,
-                 val note: Note,
-                 val noteRepositoryName: String) : Screen(database) {
+class NoteScreen(
+    private val database: NoteDatabase,
+    private val note: Note,
+    private val noteRepositoryName: String) : Screen(database) {
     override fun showMenu(): String {
         val menu = StringBuilder()
-        menu.append("============================================")
-        menu.append(System.lineSeparator())
-        menu.append("0. Выход")
-        menu.append(System.lineSeparator())
-        menu.append("Название архива заметки: $noteRepositoryName")
-        menu.append(System.lineSeparator())
-        menu.append("Название заметки: ${note.title}")
-        menu.append(System.lineSeparator())
-        menu.append("Текст заметки: ${note.text}")
-        menu.append(System.lineSeparator())
+        menu.appendLine("============================================")
+        menu.appendLine("0. Выход")
+        menu.appendLine("Название архива заметки: $noteRepositoryName")
+        menu.appendLine("Название заметки: ${note.title}")
+        menu.appendLine("Текст заметки: ${note.text}")
         return menu.toString().trim()
     }
 

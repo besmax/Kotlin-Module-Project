@@ -12,7 +12,7 @@ class NoteDatabase {
     fun addNoteRepository(noteRepository: NoteRepository) {
         val newNoteRepository = NoteRepository(NOTE_REPOSITORY_ID, noteRepository.title, noteRepository.notes)
         NOTE_REPOSITORY_ID += 1
-        noteRepositories.put(newNoteRepository.title, newNoteRepository)
+        noteRepositories[newNoteRepository.title] = newNoteRepository
     }
 
     fun addNote(note: Note, noteRepositoryTitle: String) {

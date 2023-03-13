@@ -4,17 +4,15 @@ import NoteDatabase
 import console.InputChecker
 import model.Note
 
-class NoteNewScreen(val database: NoteDatabase,
-                    val noteRepositoryName: String,
-                    val inputChecker: InputChecker) : Screen(database) {
+class NoteNewScreen(
+    private val database: NoteDatabase,
+    private val noteRepositoryName: String,
+    private val inputChecker: InputChecker) : Screen(database) {
     override fun showMenu(): String {
         var menu = StringBuilder()
-        menu.append("============================================")
-        menu.append(System.lineSeparator())
-        menu.append("0. Выход")
-        menu.append(System.lineSeparator())
-        menu.append("1. Создать новую заметку в архиве $noteRepositoryName")
-        menu.append(System.lineSeparator())
+        menu.appendLine("============================================")
+        menu.appendLine("0. Выход")
+        menu.appendLine("1. Создать новую заметку в архиве $noteRepositoryName")
 
         return menu.toString().trim()
     }

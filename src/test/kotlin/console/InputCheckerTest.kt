@@ -17,13 +17,6 @@ class InputCheckerTest {
     }
 
     @Test
-    fun getCommandFromUserPrintsWhenCommandIsNull() {
-        Mockito.`when`(consoleTest.read()).thenReturn(null).thenReturn("1")
-        inputCheckerTest.getCommandFromUser()
-        Mockito.verify(consoleTest).print("Команда не может быть null")
-    }
-
-    @Test
     fun getCommandFromUserPrintsWhenCommandIsEmptyString() {
         Mockito.`when`(consoleTest.read()).thenReturn("").thenReturn("1")
         inputCheckerTest.getCommandFromUser()

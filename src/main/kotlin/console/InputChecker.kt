@@ -8,8 +8,7 @@ class InputChecker(val console: DefaultConsole) {
             console.print("Введите команду")
             command = console.read()
             when {
-                command == null -> console.print("Команда не может быть null")
-                command == "" -> console.print("Команда не может быть пустой")
+                command.isEmpty() -> console.print("Команда не может быть пустой")
                 !command.all { it.isDigit() } -> console.print("Команда должна быть числом")
                 else -> break
             }

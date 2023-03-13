@@ -5,16 +5,14 @@ import console.InputChecker
 import model.Note
 import model.NoteRepository
 
-class NoteRepositoryNewScreen(val database: NoteDatabase,
-                              val inputChecker: InputChecker) : Screen(database) {
+class NoteRepositoryNewScreen(
+    private val database: NoteDatabase,
+    private val inputChecker: InputChecker) : Screen(database) {
     override fun showMenu(): String {
         var menu = StringBuilder()
-        menu.append("============================================")
-        menu.append(System.lineSeparator())
-        menu.append("0. Выход")
-        menu.append(System.lineSeparator())
-        menu.append("1. Создание нового архива")
-        menu.append(System.lineSeparator())
+        menu.appendLine("============================================")
+        menu.appendLine("0. Выход")
+        menu.appendLine("1. Создание нового архива")
         return menu.toString().trim()
     }
 
